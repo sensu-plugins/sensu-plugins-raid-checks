@@ -1,27 +1,48 @@
-#!/usr/bin/env ruby
+#! /usr/bin/env ruby
 #
-# Check 3ware Status Plugin
-# ===
+#   check-raid
 #
-# Checks status for all HDDs in all 3ware controllers.
+# DESCRIPTION:
+#   Check 3ware Status Plugin
 #
-# tw-cli requires root permissions.
+#   MegaCli/MegaCli64 requires root access
 #
-# Create a file named /etc/sudoers.d/tw-cli with this line inside :
-# sensu ALL=(ALL) NOPASSWD: /usr/sbin/tw-cli
+# OUTPUT:
+#   plain text
+#
+# PLATFORMS:
+#   Linux
+#
+# DEPENDENCIES:
+#   gem: sensu-plugin
+#   gem: english
+#
+# USAGE:
+#
+# NOTES:
+#   Checks status for all HDDs in all 3ware controllers.
+#
+#   tw-cli requires root permissions.
+#
+#   Create a file named /etc/sudoers.d/tw-cli with this line inside :
+#   sensu ALL=(ALL) NOPASSWD: /usr/sbin/tw-cli
 #
 # You can get Debian/Ubuntu tw-cli packages here - http://hwraid.le-vert.net/
 #
-# Copyright 2014 Alexander Bulimov <lazywolf0@gmail.com>
+# LICENSE:
+#   Copyright 2014 Alexander Bulimov <lazywolf0@gmail.com>
+#   Released under the same terms as Sensu (the MIT license); see LICENSE  for details.
 #
-# Released under the same terms as Sensu (the MIT license); see LICENSE
-# for details.
 
-require 'rubygems' if RUBY_VERSION < '1.9.0'
 require 'sensu-plugin/check/cli'
 require 'open3'
 
+#
+# Check 3ware Status
+#
 class Check3wareStatus < Sensu::Plugin::Check::CLI
+  # Setup variables
+  #
   def initialize
     super
     @binary = 'sudo -n -k tw-cli'
@@ -30,6 +51,11 @@ class Check3wareStatus < Sensu::Plugin::Check::CLI
     @bad_disks = []
   end
 
+  # Execute a specific command to acquire the exit code
+  # stderr, and  raw data
+  #
+  # @param [String] command to run
+  #
   def execute(cmd)
     captured_stdout = ''
     captured_stderr = ''
@@ -42,6 +68,10 @@ class Check3wareStatus < Sensu::Plugin::Check::CLI
     [exit_status, captured_stdout, captured_stderr]
   end
 
+  # Parse controller data
+  #
+  # @param data [String]
+  #
   def parse_controllers!(data)
     data.lines.each do |line|
       unless line.empty?
@@ -51,6 +81,11 @@ class Check3wareStatus < Sensu::Plugin::Check::CLI
     end
   end
 
+  # Parse disk data
+  #
+  # @param data [String]
+  # @param controller [String]
+  #
   def parse_disks!(data, controller)
     # #YELLOW
     data.lines.each do |line| # rubocop:disable Style/Next
@@ -75,6 +110,8 @@ class Check3wareStatus < Sensu::Plugin::Check::CLI
     end
   end
 
+  # Main function
+  #
   def run
     exit_status, raw_data, err = execute "#{@binary} info"
     unknown "tw-cli command failed - #{err}" unless exit_status.success?

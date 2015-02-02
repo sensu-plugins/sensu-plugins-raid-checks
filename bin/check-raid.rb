@@ -1,18 +1,37 @@
-#!/usr/bin/env ruby
+#! /usr/bin/env ruby
+#
+#   check-raid
+#
+# DESCRIPTION:
+#   Generic raid check
+#   Supports HP, Adaptec, and MegaRAID controllers. Also supports software RAID.
+#
+# OUTPUT:
+#   plain text
+#
+# PLATFORMS:
+#   Linux
+#
+# DEPENDENCIES:
+#   gem: sensu-plugin
+#
+# USAGE:
+#
+# NOTES:
+#
+# LICENSE:
+# Originally by Shane Feek, modified by Alan Smith. Date: 07/14/2014#
+# Released under the same terms as Sensu (the MIT license); see LICENSE  for details.
+#
 
-#
-# Check for malfunctioning RAID array.
-#
-# Supports HP, Adaptec, and MegaRAID controllers. Also supports software RAID.
-#
-# Originally by Shane Feek, modified by Alan Smith.
-# Date: 07/14/2014
-#
-
-require 'rubygems' if RUBY_VERSION < '1.9.0'
 require 'sensu-plugin/check/cli'
 
+#
+# Check Raid
+#
 class CheckRaid < Sensu::Plugin::Check::CLI
+  # Check software raid
+  #
   def check_software
     # #YELLOW
     if File.exist?('/proc/mdstat') # rubocop:disable GuardClause
@@ -30,6 +49,8 @@ class CheckRaid < Sensu::Plugin::Check::CLI
     end
   end
 
+  # Check HP raid
+  #
   def check_hp
     # #YELLOW
     if File.exist?('/usr/bin/cciss_vol_status')  # rubocop:disable GuardClause
@@ -44,6 +65,8 @@ class CheckRaid < Sensu::Plugin::Check::CLI
     end
   end
 
+  # Check Adaptec raid controllers
+  #
   def check_adaptec
     # #YELLOW
     if File.exist?('/usr/StorMan/arcconf')  # rubocop:disable GuardClause
@@ -80,6 +103,8 @@ class CheckRaid < Sensu::Plugin::Check::CLI
     end
   end
 
+  # Check Megaraid
+  #
   def check_mega_raid
     # #YELLOW
     if File.exist?('/usr/sbin/megacli')  # rubocop:disable GuardClause
@@ -94,6 +119,8 @@ class CheckRaid < Sensu::Plugin::Check::CLI
     end
   end
 
+  # Main function
+  #
   def run
     unless `lspci`.lines.grep(/RAID/).empty?
       check_software

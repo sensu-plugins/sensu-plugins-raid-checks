@@ -1,27 +1,45 @@
-#!/usr/bin/env ruby
+#! /usr/bin/env ruby
 #
-# Check HP SmartArray Status Plugin
-# ===
+#   check-smart-array-status
 #
-# Checks status for all HDDs in all SmartArray controllers.
+# DESCRIPTION:
+#   Check HP SmartArray Status Plugin
 #
-# hpacucli requires root permissions.
+# OUTPUT:
+#   plain text
 #
-# Create a file named /etc/sudoers.d/hpacucli with this line inside :
-# sensu ALL=(ALL) NOPASSWD: /usr/sbin/hpacucli
+# PLATFORMS:
+#   Linux
 #
-# You can get Debian/Ubuntu hpacucli packages here - http://hwraid.le-vert.net/
+# DEPENDENCIES:
+#   gem: sensu-plugin
+#   gem: open3
 #
-# Copyright 2014 Alexander Bulimov <lazywolf0@gmail.com>
+# USAGE:
 #
-# Released under the same terms as Sensu (the MIT license); see LICENSE
-# for details.
+# NOTES:
+#   You can get Debian/Ubuntu hpacucli packages here - http://hwraid.le-vert.net/
+#   Checks status for all HDDs in all SmartArray controllers.
+#
+#   hpacucli requires root permissions.
+#   Create a file named /etc/sudoers.d/hpacucli with this line inside :
+#   sensu ALL=(ALL) NOPASSWD: /usr/sbin/hpacucli
+#
+# LICENSE:
+#   Copyright 2014 Alexander Bulimov <lazywolf0@gmail.com>
+#   Released under the same terms as Sensu (the MIT license); see LICENSE
+#   for details.
+#
 
-require 'rubygems' if RUBY_VERSION < '1.9.0'
 require 'sensu-plugin/check/cli'
 require 'open3'
 
+#
+# Check Smart Array Status
+#
 class CheckSmartArrayStatus < Sensu::Plugin::Check::CLI
+  # Setup variables
+  #
   def initialize
     super
     @binary = 'sudo -n -k hpacucli'
@@ -30,6 +48,9 @@ class CheckSmartArrayStatus < Sensu::Plugin::Check::CLI
     @bad_disks = []
   end
 
+  # Execute hpacucli and capture the exit status ans stdout
+  #
+  # @param cmd [String] The command to check the HP array
   def execute(cmd)
     captured_stdout = ''
     # we use popen2e because hpacucli does not use stderr for errors
@@ -41,6 +62,10 @@ class CheckSmartArrayStatus < Sensu::Plugin::Check::CLI
     [exit_status, captured_stdout]
   end
 
+  # Parse controller data
+  #
+  # @param data [String]
+  #
   def parse_controllers!(data)
     data.lines.each do |line|
       unless line.empty?
@@ -50,6 +75,11 @@ class CheckSmartArrayStatus < Sensu::Plugin::Check::CLI
     end
   end
 
+  # Parse disk data
+  #
+  # @param data [String]
+  # @param controller [String]
+  #
   def parse_disks!(data, controller)
     # #YELLOW
     data.lines.each do |line|    # rubocop:disable Style/Next
@@ -68,6 +98,8 @@ class CheckSmartArrayStatus < Sensu::Plugin::Check::CLI
     end
   end
 
+  # Main function
+  #
   def run
     exit_status, raw_data = execute "#{@binary} ctrl all show status"
     unknown "hpacucli command failed - #{raw_data}" unless exit_status.success?

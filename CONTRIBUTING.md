@@ -1,4 +1,3 @@
-
 If you have a new plugin or handler, send a pull request! Don't be afraid on pushing your PR with non-ruby code. Just let someone from [team](https://github.com/sensu?tab=members) know. Maybe we can help you to rewrite your check to Ruby or even invent something completely new to test your work. Just don't hesitate to contact us.
 
 ## Naming Conventions
@@ -60,7 +59,7 @@ All documentation will be handled by Yard and we are using the default markup at
 rake yard
 ```
 
-The output will tell you how much coverage you have without spending the time building the docs.  
+The output will tell you how much coverage you have without spending the time building the docs.
 
 Documentation can always be made better, if you would like to contribute to it, have at it and submit a PR.
 
@@ -130,7 +129,7 @@ When submitting a pull request please follow the guidelines below for the quicke
 
 If you wish to track the status of your PR or issue, check out our [waffle.io](https://waffle.io/sensu/sensu-community-plugins).  This single location will allow contributors to stay on top of interwinding issues more effectively.
 
-Please do not not abandon your pull request, only you can help us merge it. We will wait for feedback from you on your pull request for up to one month. A lack of feedback in one month may require you to re-open your pull request.  
+Please do not not abandon your pull request, only you can help us merge it. We will wait for feedback from you on your pull request for up to one month. A lack of feedback in one month may require you to re-open your pull request.
 
 ## Technical Debt
 

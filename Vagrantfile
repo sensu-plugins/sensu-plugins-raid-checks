@@ -5,7 +5,7 @@ VAGRANTFILE_API_VERSION = '2'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box = 'chef/centos-6.5'
+  config.vm.box = 'chef/centos-6.6'
   config.vm.box_download_checksum = true
   config.vm.box_download_checksum_type = 'md5'
   config.vm.hostname = 'sensu-plugins-dev'
