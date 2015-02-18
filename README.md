@@ -1,4 +1,4 @@
-## Sensu-Plugins-raid-checks-Checks
+## Sensu-Plugins-raid-checks
 
 [![Build Status](https://travis-ci.org/sensu-plugins/sensu-plugins-raid-checks.svg?branch=master)](https://travis-ci.org/sensu-plugins/sensu-plugins-raid-checks)
 [![Gem Version](https://badge.fury.io/rb/sensu-plugins-raid-checks.svg)](http://badge.fury.io/rb/sensu-plugins-raid-checks)
