@@ -1,5 +1,6 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
 require 'date'
 
 if RUBY_VERSION < '2.0.0'
@@ -11,13 +12,13 @@ end
 pvt_key = '~/.ssh/gem-private_key.pem'
 
 Gem::Specification.new do |s|
+  s.authors                = ['Sensu-Plugins and contributors']
   s.name                  = 'sensu-plugins-raid-checks'
   s.version               = SensuPluginsRaidChecks::VERSION
-  s.authors               = ['Yieldbot, Inc and contributors']
   s.email                 = '<sensu-users@googlegroups.com>'
   s.homepage              = 'https://github.com/sensu-plugins/sensu-plugins-raid-checks'
-  s.summary               = 'Sensu nginx checks'
-  s.description           = 'Sensu nginx checks'
+  s.summary               = 'Sensu RAID checks'
+  s.description           = 'Sensu RAID checks'
   s.license               = 'MIT'
   s.date                  = Date.today.to_s
   s.files                 = Dir.glob('{bin,lib}/**/*') + %w(LICENSE README.md CHANGELOG.md)
@@ -29,14 +30,15 @@ Gem::Specification.new do |s|
   s.platform              = Gem::Platform::RUBY
   s.required_ruby_version = '>= 1.9.3'
 
-  s.add_runtime_dependency 'sensu-plugin',      '1.1.0'
+  s.add_runtime_dependency 'sensu-plugin', '1.1.0'
 
-  s.add_development_dependency 'codeclimate-test-reporter'
-  s.add_development_dependency 'rubocop',       '~> 0.30'
-  s.add_development_dependency 'rspec',         '~> 3.1'
-  s.add_development_dependency 'bundler',       '~> 1.7'
-  s.add_development_dependency 'rake',          '~> 10.0'
-  s.add_development_dependency 'github-markup'
-  s.add_development_dependency 'redcarpet'
-  s.add_development_dependency 'yard'
+  s.add_development_dependency 'codeclimate-test-reporter', '~> 0.4'
+  s.add_development_dependency 'rubocop',                   '~> 0.30'
+  s.add_development_dependency 'rspec',                     '~> 3.1'
+  s.add_development_dependency 'bundler',                   '~> 1.7'
+  s.add_development_dependency 'rake',                      '~> 10.0'
+  s.add_development_dependency 'github-markup',             '~> 1.3'
+  s.add_development_dependency 'redcarpet',                 '~> 3.2'
+  s.add_development_dependency 'yard',                      '~> 0.8'
+  s.add_development_dependency 'pry',                       '~> 0.10'
 end
