@@ -25,18 +25,7 @@
 
 ## Installation
 
+[Installation and Setup](https://github.com/sensu-plugins/documentation/blob/master/user_docs/installation_instructions.md)
 
-Add the public key (if you haven’t already) as a trusted certificate
-
-```
-gem cert --add <(curl -Ls https://raw.githubusercontent.com/sensu-plugins/sensu-plugins.github.io/master/certs/sensu-plugins.pem)
-gem install <gem> -P MediumSecurity
-```
-
-You can also download the key from /certs/ within each repository.
-
-`gem install sensu-plugins-raid-checks`
-
-Add *sensu-plugins-raid-checks* to your Gemfile, manifest, cookbook, etc
 
 ## Notes
