@@ -100,7 +100,7 @@ class CheckSmartArrayStatus < Sensu::Plugin::Check::CLI
 
   # Main function
   #
-  def run
+  def run # rubocop:disable all
     exit_status, raw_data = execute "#{@binary} ctrl all show status"
     unknown "hpacucli command failed - #{raw_data}" unless exit_status.success?
     parse_controllers! raw_data

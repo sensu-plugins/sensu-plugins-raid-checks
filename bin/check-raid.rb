@@ -67,7 +67,7 @@ class CheckRaid < Sensu::Plugin::Check::CLI
 
   # Check Adaptec raid controllers
   #
-  def check_adaptec
+  def check_adaptec # rubocop:disable all
     # #YELLOW
     if File.exist?('/usr/StorMan/arcconf')  # rubocop:disable GuardClause
       contents = `/usr/StorMan/arcconf GETCONFIG 1 AL`
