@@ -29,6 +29,7 @@
 
 require 'sensu-plugin/check/cli'
 require 'English'
+
 #
 # Check MegaRAID
 #
