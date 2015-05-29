@@ -122,8 +122,8 @@ class CheckRaid < Sensu::Plugin::Check::CLI
   # Main function
   #
   def run
+    check_software
     unless `lspci`.lines.grep(/RAID/).empty?
-      check_software
       check_hp
       check_adaptec
       check_mega_raid
