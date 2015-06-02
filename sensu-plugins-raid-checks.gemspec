@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.date                   = Date.today.to_s
   s.description            = 'Sensu plugins for working with raid devices'
   s.email                  = '<sensu-users@googlegroups.com>'
-  s.executables            = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  s.executables            = Dir.glob("bin/**/*").map { |file| File.basename(file) }
   s.files                  = Dir.glob('{bin,lib}/**/*') + %w(LICENSE README.md CHANGELOG.md)
   s.homepage               = 'https://github.com/sensu-plugins/sensu-plugins-raid-checks'
   s.license                = 'MIT'
@@ -39,6 +39,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'sensu-plugin',      '1.1.0'
   s.add_runtime_dependency 'english',           '0.6.3'
+  s.add_runtime_dependency 'timeout',           '0.0.1'
 
   s.add_development_dependency 'codeclimate-test-reporter', '~> 0.4'
   s.add_development_dependency 'rubocop',                   '~> 0.30'
