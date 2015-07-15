@@ -3,7 +3,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
-## Unreleased][unreleased]
+## Unreleased
 
 ## [0.0.4] - 2015-07-14
 ### Changed
@@ -16,7 +16,7 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
     - If a grep of lspci returns nothing then don't check for software raid.
 
 ### Fixed
-- Set the gemspec to only create binstubs for Ruby scripts 
+- Set the gemspec to only create binstubs for Ruby scripts
 
 ## [0.0.2] - 2015-06-03
 
