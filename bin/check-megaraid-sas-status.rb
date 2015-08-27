@@ -48,7 +48,7 @@ class CheckMegraRAID < Sensu::Plugin::Check::CLI
          default: 0
   # Main function
   #
-  def run # rubocop:disable all
+  def run
     have_error = false
     error = ''
     # get number of virtual drives
@@ -57,7 +57,7 @@ class CheckMegraRAID < Sensu::Plugin::Check::CLI
       # and check them in turn
       stdout = `#{config[:megaraidcmd]} -LDInfo -L#{i} -a#{config[:controller]} `
       unless Regexp.new('State\s*:\s*Optimal').match(stdout)
-        error = sprintf '%svirtual drive %d: %s ', error, i, stdout[/State\s*:\s*.*/].split(':')[1] # rubocop:disable all
+        error = sprintf '%svirtual drive %d: %s ', error, i, stdout[/State\s*:\s*.*/].split(':')[1] # rubocop:disable Style/FormatString
         have_error = true
       end
     end

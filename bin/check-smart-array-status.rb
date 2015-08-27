@@ -82,7 +82,7 @@ class CheckSmartArrayStatus < Sensu::Plugin::Check::CLI
   #
   def parse_disks!(data, controller)
     # #YELLOW
-    data.lines.each do |line|    # rubocop:disable Style/Next
+    data.lines.each do |line|
       unless line.empty?
         splitted = line.split
         if /^physicaldrive$/ =~ splitted[0]
@@ -100,7 +100,7 @@ class CheckSmartArrayStatus < Sensu::Plugin::Check::CLI
 
   # Main function
   #
-  def run # rubocop:disable all
+  def run
     exit_status, raw_data = execute "#{@binary} ctrl all show status"
     unknown "hpacucli command failed - #{raw_data}" unless exit_status.success?
     parse_controllers! raw_data

@@ -86,9 +86,9 @@ class Check3wareStatus < Sensu::Plugin::Check::CLI
   # @param data [String]
   # @param controller [String]
   #
-  def parse_disks!(data, controller) # rubocop:disable all
+  def parse_disks!(data, controller)
     # #YELLOW
-    data.lines.each do |line| # rubocop:disable Style/Next
+    data.lines.each do |line|
       unless line.empty?
         splitted = line.split
         if /^[p][0-9]+$/ =~ splitted[0]
@@ -112,7 +112,7 @@ class Check3wareStatus < Sensu::Plugin::Check::CLI
 
   # Main function
   #
-  def run # rubocop:disable all
+  def run
     exit_status, raw_data, err = execute "#{@binary} info"
     unknown "tw-cli command failed - #{err}" unless exit_status.success?
     parse_controllers! raw_data
