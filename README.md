@@ -12,6 +12,8 @@
 
 **check-megaraid-sas-status.rb**
 
+**check-mpt2sas-status.rb**
+
 **check-raid-checks**
 
 **check-smart-array-status.rb**
@@ -20,6 +22,7 @@
 
 * bin/check-3ware-status.rb
 * bin/check-megaraid-sas-status.rb
+* bin/check-mpt2sas-status.rb
 * bin/check-raid-checks
 * bin/check-smart-array-status.rb
 
