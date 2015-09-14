@@ -50,14 +50,14 @@ class CheckMPT2SAS < Sensu::Plugin::Check::CLI
   def run
     have_error = false
     error = ''
-    volumeState = /\s*Volume\ state\s*:\s*(?<VolState>.*)/x
+    volume_state = /\s*Volume\ state\s*:\s*(?<VolState>.*)/x
 
     stdout = `#{config[:sas2ircucmd]} #{config[:controller]} status `
     stdout.each_line do |line|
-      parts = line.match(volumeState)
+      parts = line.match(volume_state)
       unless parts.nil?
-        unless parts["VolState"] == 'Optimal'
-          error = sprintf '%s%s ',error,parts["VolState"]
+        unless parts['VolState'] == 'Optimal'
+          error = '%s%s '%[error, parts['VolState']]
           have_error = true
         end
       end
