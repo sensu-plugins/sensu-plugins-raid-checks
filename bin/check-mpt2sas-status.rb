@@ -3,7 +3,7 @@
 #   check-raid
 #
 # DESCRIPTION:
-#   Checks the status of all virtual drives of a particular 
+#   Checks the status of all virtual drives of a particular
 #   LSI FusionMPT SAS 2.0 controller, such as the DELL PERC H200
 #
 #   sas2ircu requires root access
