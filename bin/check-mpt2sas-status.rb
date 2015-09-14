@@ -57,7 +57,7 @@ class CheckMPT2SAS < Sensu::Plugin::Check::CLI
       parts = line.match(volume_state)
       unless parts.nil?
         unless parts['VolState'] == 'Optimal'
-          error = '%s%s ' % [error, parts['VolState']]
+          error = format('%s%s ', error, parts['VolState'])
           have_error = true
         end
       end
