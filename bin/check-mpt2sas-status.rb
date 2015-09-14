@@ -23,7 +23,7 @@
 # NOTES:
 #   you need to download the sas2ircu utility which you can get from the LSI
 #   web site.
-#   
+#
 #   sas2ircu requires root permissions
 #
 #   Create a file named /etc/sudoers.d/sas2ircu with this line inside :
