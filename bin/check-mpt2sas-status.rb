@@ -3,9 +3,10 @@
 #   check-raid
 #
 # DESCRIPTION:
-#   Checks the status of all virtual drives of a particular controller
+#   Checks the status of all virtual drives of a particular 
+#   LSI FusionMPT SAS 2.0 controller, such as the DELL PERC H200
 #
-# sas2ircu requires root access
+#   sas2ircu requires root access
 #
 # OUTPUT:
 #   plain text
@@ -20,6 +21,13 @@
 # USAGE:
 #
 # NOTES:
+#   you need to download the sas2ircu utility which you can get from the LSI
+#   web site.
+#   
+#   sas2ircu requires root permissions
+#
+#   Create a file named /etc/sudoers.d/sas2ircu with this line inside :
+#   sensu ALL=(ALL) NOPASSWD: /usr/sbin/sas2ircu
 #
 # LICENSE:
 #   Copyright 2015 Magnus Hagdorn <magnus.hagdorn@ed.ac.uk>
