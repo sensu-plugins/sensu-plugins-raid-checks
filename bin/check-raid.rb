@@ -112,7 +112,7 @@ class CheckRaid < Sensu::Plugin::Check::CLI
       failed = contents.lines.grep(/(Critical|Failed) Disks\s+\: 0/)
       degraded = contents.lines.grep(/Degraded\s+\: 0/)
       # #YELLOW
-      unless failed.empty? or degraded.empty? # rubocop:disable UnlessElse
+      unless failed.empty? || degraded.empty? # rubocop:disable UnlessElse
         ok 'MegaRaid RAID OK'
       else
         warning 'MegaRaid RAID warning'
