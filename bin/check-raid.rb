@@ -33,13 +33,11 @@ class CheckRaid < Sensu::Plugin::Check::CLI
   # Check software raid
   #
   def check_software
-    # #YELLOW
-    if File.exist?('/proc/mdstat') # rubocop:disable GuardClause
+    if File.exist?('/proc/mdstat')
       contents = File.read('/proc/mdstat')
       mg = contents.lines.grep(/active/)
       unless mg.empty?
         sg = mg.to_s.lines.grep(/\]\(F\)/)
-        # #YELLOW
         unless sg.empty? # rubocop:disable UnlessElse
           warning 'Software RAID warning'
         else
@@ -52,8 +50,7 @@ class CheckRaid < Sensu::Plugin::Check::CLI
   # Check HP raid
   #
   def check_hp
-    # #YELLOW
-    if File.exist?('/usr/bin/cciss_vol_status') # rubocop:disable GuardClause
+    if File.exist?('/usr/bin/cciss_vol_status')
       contents = `/usr/bin/cciss_vol_status /dev/sg0`
       c = contents.lines.grep(/status\: OK\./)
       # #YELLOW
@@ -68,8 +65,7 @@ class CheckRaid < Sensu::Plugin::Check::CLI
   # Check Adaptec raid controllers
   #
   def check_adaptec
-    # #YELLOW
-    if File.exist?('/usr/StorMan/arcconf') # rubocop:disable GuardClause
+    if File.exist?('/usr/StorMan/arcconf')
       contents = `/usr/StorMan/arcconf GETCONFIG 1 AL`
 
       mg = contents.lines.grep(/Controller Status/)
@@ -106,8 +102,7 @@ class CheckRaid < Sensu::Plugin::Check::CLI
   # Check Megaraid
   #
   def check_mega_raid
-    # #YELLOW
-    if File.exist?('/usr/sbin/megacli') # rubocop:disable GuardClause
+    if File.exist?('/usr/sbin/megacli')
       contents = `/usr/sbin/megacli -AdpAllInfo -aALL`
       failed = contents.lines.grep(/(Critical|Failed) Disks\s+\: 0/)
       degraded = contents.lines.grep(/Degraded\s+\: 0/)
