@@ -24,7 +24,7 @@ deploy:
     secure: iGZDmc7nje9ynhvw4eTlyMgUzepqGvPbteehWgUMRJqXy22xHOiKlHb6wExtd5luvTUwpti4UOqeV1d9+23sgMUb+TwXDY5LiH+7sSy9FeptdOsEqggRPcRl9PsgnGQu3FJzun7v04UyNeJ0ng4NZtyAeq9ykNVyUauizY3nFAo=
   gem: sensu-plugins-raid-checks
   on:
-    ags: true
+    tags: true
     all_branches: true
     rvm: 1.9.3
     rvm: 2.0
