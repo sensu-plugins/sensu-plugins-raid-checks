@@ -58,7 +58,7 @@ class CheckMegaRAID < Sensu::Plugin::Check::CLI
     have_error = false
     error = ''
 
-    megaraidcmd = if config[:sudo] 
+    megaraidcmd = if config[:sudo]
                     '/bin/sudo ' << config[:megaraidcmd]
                   else
                     config[:megaraidcmd]
