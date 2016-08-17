@@ -10,7 +10,7 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 - Fixed typo in check-megaraid-sas-status.rb
 
 ### Changed
-- Added /bin/sudo to default command in check-megaraid-sas-status.rb
+- Added -s/--sudo flag to allow check to run with sudo
 
 ## [0.1.0] - 2015-09-14
 ### Added

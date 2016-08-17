@@ -38,7 +38,13 @@ class CheckMegaRAID < Sensu::Plugin::Check::CLI
          description: 'the MegaCli executable',
          short: '-c CMD',
          long: '--command CMD',
-         default: '/bin/sudo /opt/MegaRAID/MegaCli/MegaCli64'
+         default: '/opt/MegaRAID/MegaCli/MegaCli64'
+
+  option :sudo,
+         description: 'run MegaCli with sudo',
+         short: '-s',
+         long: '--sudo',
+         default: 'false'
 
   option :controller,
          description: 'the controller to query',
@@ -51,11 +57,18 @@ class CheckMegaRAID < Sensu::Plugin::Check::CLI
   def run
     have_error = false
     error = ''
+
+    if "#{config[:sudo]}" == "true"
+      megaraidcmd = "/bin/sudo " << "#{config[:megaraidcmd]}"
+    else
+      megaraidcmd = "#{config[:megaraidcmd]}"
+    end
+
     # get number of virtual drives
-    `#{config[:megaraidcmd]} -LDGetNum -a#{config[:controller]} `
+    `#{megaraidcmd} -LDGetNum -a#{config[:controller]} `
     (0..$CHILD_STATUS.exitstatus - 1).each do |i|
       # and check them in turn
-      stdout = `#{config[:megaraidcmd]} -LDInfo -L#{i} -a#{config[:controller]} `
+      stdout = `#{megaraidcmd} -LDInfo -L#{i} -a#{config[:controller]} `
       unless Regexp.new('State\s*:\s*Optimal').match(stdout)
         error = sprintf '%svirtual drive %d: %s ', error, i, stdout[/State\s*:\s*.*/].split(':')[1] # rubocop:disable Style/FormatString
         have_error = true
