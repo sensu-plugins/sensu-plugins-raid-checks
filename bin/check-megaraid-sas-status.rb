@@ -58,11 +58,11 @@ class CheckMegaRAID < Sensu::Plugin::Check::CLI
     have_error = false
     error = ''
 
-    if "#{config[:sudo]}" == "true"
-      megaraidcmd = "/bin/sudo " << "#{config[:megaraidcmd]}"
-    else
-      megaraidcmd = "#{config[:megaraidcmd]}"
-    end
+    megaraidcmd = if config[:sudo] 
+                    '/bin/sudo ' << config[:megaraidcmd]
+                  else
+                    config[:megaraidcmd]
+                  end
 
     # get number of virtual drives
     `#{megaraidcmd} -LDGetNum -a#{config[:controller]} `
