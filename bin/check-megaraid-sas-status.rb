@@ -44,7 +44,7 @@ class CheckMegaRAID < Sensu::Plugin::Check::CLI
          description: 'run MegaCli with sudo',
          short: '-s',
          long: '--sudo',
-         default: 'false'
+         default: false
 
   option :controller,
          description: 'the controller to query',
