@@ -33,12 +33,12 @@ require 'English'
 #
 # Check MegaRAID
 #
-class CheckMegraRAID < Sensu::Plugin::Check::CLI
+class CheckMegaRAID < Sensu::Plugin::Check::CLI
   option :megaraidcmd,
          description: 'the MegaCli executable',
          short: '-c CMD',
          long: '--command CMD',
-         default: '/opt/MegaRAID/MegaCli/MegaCli64'
+         default: '/bin/sudo /opt/MegaRAID/MegaCli/MegaCli64'
 
   option :controller,
          description: 'the controller to query',
