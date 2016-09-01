@@ -35,9 +35,9 @@ class CheckRaid < Sensu::Plugin::Check::CLI
   def check_software
     if File.exist?('/proc/mdstat')
       contents = File.read('/proc/mdstat')
-      mg = contents.lines.grep(/active/)
+      mg = contents.lines.grep(/active|blocks/)
       unless mg.empty?
-        sg = mg.to_s.lines.grep(/\]\(F\)/)
+        sg = mg.to_s.lines.grep(/\]\(F\)|[\[U]_/)
         unless sg.empty? # rubocop:disable UnlessElse
           warning 'Software RAID warning'
         else
