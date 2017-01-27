@@ -24,7 +24,7 @@
 #
 #   tw-cli requires root permissions.
 #
-#   Create a file named /etc/sudoers.d/tw-cli with this line inside :
+#   Create a file named /etc/sudoers.d/tw-cli with the path to your tw-cli inside :
 #   sensu ALL=(ALL) NOPASSWD: /usr/sbin/tw-cli
 #
 # You can get Debian/Ubuntu tw-cli packages here - http://hwraid.le-vert.net/
