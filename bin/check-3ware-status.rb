@@ -41,11 +41,17 @@ require 'open3'
 # Check 3ware Status
 #
 class Check3wareStatus < Sensu::Plugin::Check::CLI
+  option :twclicommand,
+         description: 'the tw-cli executable',
+         short: '-c CMD',
+         long: '--command CMD',
+         default: 'tw-cli'
+
   # Setup variables
   #
   def initialize
     super
-    @binary = 'sudo -n -k tw-cli'
+    @binary = "sudo -n -k #{config[:twclicommand]}"
     @controllers = []
     @good_disks = []
     @bad_disks = []
