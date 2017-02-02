@@ -33,7 +33,7 @@ require 'English'
 #
 # Check MegaRAID
 #
-class CheckMegraRAID < Sensu::Plugin::Check::CLI
+class CheckMegaRAID < Sensu::Plugin::Check::CLI
   option :megaraidcmd,
          description: 'the MegaCli executable',
          short: '-c CMD',
