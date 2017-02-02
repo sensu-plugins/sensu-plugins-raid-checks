@@ -24,7 +24,7 @@
 #
 #   tw-cli requires root permissions.
 #
-#   Create a file named /etc/sudoers.d/tw-cli with this line inside :
+#   Create a file named /etc/sudoers.d/tw-cli with the path to your tw-cli inside :
 #   sensu ALL=(ALL) NOPASSWD: /usr/sbin/tw-cli
 #
 # You can get Debian/Ubuntu tw-cli packages here - http://hwraid.le-vert.net/
@@ -41,11 +41,17 @@ require 'open3'
 # Check 3ware Status
 #
 class Check3wareStatus < Sensu::Plugin::Check::CLI
+  option :twclicommand,
+         description: 'the tw-cli executable',
+         short: '-c CMD',
+         long: '--command CMD',
+         default: 'tw-cli'
+
   # Setup variables
   #
   def initialize
     super
-    @binary = 'sudo -n -k tw-cli'
+    @binary = "sudo -n -k #{config[:twclicommand]}"
     @controllers = []
     @good_disks = []
     @bad_disks = []
