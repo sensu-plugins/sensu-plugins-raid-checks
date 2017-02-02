@@ -4,12 +4,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
-### Added
-- add option to check-3ware-status to specify the path to tw-cli binary
 
-## [0.1.1] - 2016-09-01
+## [1.0.0] - 2017-02-02
 ### Added
-- improvement to regex checks for check_software method in check-raid plugin
+- improvement to regex checks for check_software method in check-raid plugin (@scosist)
+- Ruby 2.3.0 support (@mattyjones/@eheydrick)
+- `check-3ware-status`: add option to specify the path to tw-cli binary (@GhostLyrics)
+
+### Removed
+- Ruby < 2.1 support (@mattyjones/@eheydrick)
 
 ## [0.1.0] - 2015-09-14
 ### Added
@@ -38,8 +41,8 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Added
 - initial release
 
-[unreleased]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/0.1.1...HEAD
-[0.1.1]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/0.1.0...0.1.1
+[unreleased]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/0.1.0...1.0.0
 [0.1.0]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/0.0.4...0.1.0
 [0.0.4]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/0.0.3...0.0.4
 [0.0.3]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/0.0.2...0.0.3
