@@ -11,6 +11,13 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Added
 - improvement to regex checks for check_software method in check-raid plugin
 
+## [0.1.1] - 2016-08-17
+### Fixed
+- Fixed typo in check-megaraid-sas-status.rb
+
+### Changed
+- Added -s/--sudo flag to allow check-megaraid-sas-status.rb to run with sudo
+
 ## [0.1.0] - 2015-09-14
 ### Added
 - added a new check-mpt2sas-status plugin
