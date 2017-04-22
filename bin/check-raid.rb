@@ -99,6 +99,46 @@ class CheckRaid < Sensu::Plugin::Check::CLI
     end
   end
 
+  # Check Adaptec raid controllers installed from debian package, requires root privileges
+  # Create a file /etc/sudoers.d/arcconf with contents
+  # sensu ALL=(ALL) NOPASSWD: /usr/sbin/arcconf
+  #
+  def check_adaptec_sudo
+    if File.exist?('/usr/sbin/arcconf')
+      contents = `/usr/bin/sudo /usr/sbin/arcconf GETCONFIG 1 AL`
+
+      mg = contents.lines.grep(/Controller Status/)
+      # #YELLOW
+      unless mg.empty? # rubocop:disable UnlessElse
+        sg = mg.to_s.lines.grep(/Optimal/)
+        warning 'Adaptec Physical RAID Controller Failure' if sg.empty?
+      else
+        warning "Adaptec Physical RAID Controller Status Read Failure"
+      end
+
+      mg = contents.lines.grep(/Status of logical device/)
+      # #YELLOW
+      unless mg.empty? # rubocop:disable UnlessElse
+        sg = mg.to_s.lines.grep(/Optimal/)
+        warning 'Adaptec Logical RAID Controller Failure' if sg.empty?
+      else
+        warning 'Adaptec Logical RAID Controller Status Read Failure'
+      end
+
+      mg = contents.lines.grep(/S\.M\.A\.R\.T\.   /)
+      # #YELLOW
+      unless mg.empty? # rubocop:disable UnlessElse
+        sg = mg.to_s.lines.grep(/No/)
+        warning 'Adaptec S.M.A.R.T. Disk Failed' if sg.empty?
+      else
+        warning 'Adaptec S.M.A.R.T. Status Read Failure'
+      end
+
+      ok 'Adaptec RAID OK'
+    end
+  end
+  
+  
   # Check Megaraid
   #
   def check_mega_raid
