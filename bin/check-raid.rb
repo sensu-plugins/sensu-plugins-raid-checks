@@ -103,7 +103,7 @@ class CheckRaid < Sensu::Plugin::Check::CLI
   #
   def check_mega_raid
     if File.exist?('/usr/sbin/megacli')
-      contents = `/usr/sbin/megacli -AdpAllInfo -aALL`
+      contents = `/usr/sbin/megacli -AdpAllInfo -aALL -NoLog`
       failed = contents.lines.grep(/(Critical|Failed) Disks\s+\: 0/)
       degraded = contents.lines.grep(/Degraded\s+\: 0/)
       # #YELLOW
