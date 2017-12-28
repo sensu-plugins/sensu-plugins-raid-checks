@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+### Breaking Change
+- `check-raid.rb`: added option `--log` with a default of `false` to prevent it default creating a log which is frequently being written to and filling up the disk. This does the *opposite* of what the vendor defaults are but due to the nature of those running it through a monitoring solution like sensu the defaults do not make sense in this use case. If you are wanting those logs you can change this to `true` to keep existing behavior.
+
 ### Added
 - Ruby 2.4.1 testing
 

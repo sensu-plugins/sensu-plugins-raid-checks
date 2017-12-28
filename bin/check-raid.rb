@@ -30,6 +30,12 @@ require 'sensu-plugin/check/cli'
 # Check Raid
 #
 class CheckRaid < Sensu::Plugin::Check::CLI
+  option :log,
+         description: 'Enables or disables logging for megacli',
+         short: '-l VALUE',
+         long: '--log VALUE',
+         boolean: true,
+         default: false
   # Check software raid
   #
   def check_software
@@ -103,7 +109,11 @@ class CheckRaid < Sensu::Plugin::Check::CLI
   #
   def check_mega_raid
     if File.exist?('/usr/sbin/megacli')
-      contents = `/usr/sbin/megacli -AdpAllInfo -aALL`
+      contents = if config[:log]
+                   `/usr/sbin/megacli -AdpAllInfo -aALL`
+                 else
+                   `/usr/sbin/megacli -AdpAllInfo -aALL -NoLog`
+                 end
       failed = contents.lines.grep(/(Critical|Failed) Disks\s+\: 0/)
       degraded = contents.lines.grep(/Degraded\s+\: 0/)
       # #YELLOW
