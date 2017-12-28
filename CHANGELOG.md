@@ -1,17 +1,23 @@
-#Change Log
+# Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
+This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins/community/blob/master/HOW_WE_CHANGELOG.md).
+Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+
+## [2.0.0] - 2017-12-28
 ### Breaking Change
-- `check-raid.rb`: added option `--log` with a default of `false` to prevent it default creating a log which is frequently being written to and filling up the disk. This does the *opposite* of what the vendor defaults are but due to the nature of those running it through a monitoring solution like sensu the defaults do not make sense in this use case. If you are wanting those logs you can change this to `true` to keep existing behavior.
+- `check-raid.rb`: added option `--log` with a default of `false` to prevent it default creating a log which is frequently being written to and filling up the disk. This does the *opposite* of what the vendor defaults are but due to the nature of those running it through a monitoring solution like sensu the defaults do not make sense in this use case. If you are wanting those logs you can change this to `true` to keep existing behavior. (@dhpowrhost) (@smbambling)
+
+### Changed
+- changelog guidelines location (@majormoses)
 
 ### Added
 - Ruby 2.4.1 testing
 
 ### Removed
-- Remove timeout gem dependency as this is not actually called in the code. However it was causing the build to fail. 
+- Remove timeout gem dependency as this is not actually called in the code. However it was causing the build to fail.
 
 ## [1.0.0] - 2017-02-02
 ### Added
@@ -49,7 +55,8 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Added
 - initial release
 
-[unreleased]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/2.0.0...HEAD
+[2.0.0]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/1.0.0...2.0.0
 [1.0.0]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/0.1.0...1.0.0
 [0.1.0]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/0.0.4...0.1.0
 [0.0.4]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/0.0.3...0.0.4
