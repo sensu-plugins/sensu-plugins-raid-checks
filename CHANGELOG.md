@@ -6,6 +6,12 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
 
+### Security
+- updated rubocop dependency to `~> 0.51.0` per: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-8418. (@majormoses)
+
+### Changed
+- appeased the cops (@majormoses)
+
 ## [2.0.0] - 2017-12-28
 ### Breaking Change
 - `check-raid.rb`: added option `--log` with a default of `false` to prevent it default creating a log which is frequently being written to and filling up the disk. This does the *opposite* of what the vendor defaults are but due to the nature of those running it through a monitoring solution like sensu the defaults do not make sense in this use case. If you are wanting those logs you can change this to `true` to keep existing behavior. (@dhpowrhost) (@smbambling)

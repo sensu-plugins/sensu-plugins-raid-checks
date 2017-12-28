@@ -1,4 +1,6 @@
 #! /usr/bin/env ruby
+# frozen_string_literal: true
+
 #
 #   check-smart-array-status
 #
@@ -85,7 +87,7 @@ class CheckSmartArrayStatus < Sensu::Plugin::Check::CLI
     data.lines.each do |line|
       unless line.empty?
         splitted = line.split
-        if /^physicaldrive$/ =~ splitted[0]
+        if splitted.first.match?(/^physicaldrive$/)
           status = splitted[-1]
           disk = 'ctrl ' + controller + ' ' + line.strip
           if status == 'OK'

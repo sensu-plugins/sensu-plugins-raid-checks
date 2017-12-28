@@ -1,4 +1,6 @@
 #! /usr/bin/env ruby
+# frozen_string_literal: true
+
 #
 #   check-raid
 #
@@ -82,7 +84,7 @@ class Check3wareStatus < Sensu::Plugin::Check::CLI
     data.lines.each do |line|
       unless line.empty?
         controller = line.split[0]
-        @controllers << controller if /^c[0-9]+$/ =~ controller
+        @controllers << controller if controller.match?(/^c[0-9]+$/)
       end
     end
   end
@@ -97,7 +99,7 @@ class Check3wareStatus < Sensu::Plugin::Check::CLI
     data.lines.each do |line|
       unless line.empty?
         splitted = line.split
-        if /^[p][0-9]+$/ =~ splitted[0]
+        if splitted.first.match?(/^[p][0-9]+$/)
           # '-' means the drive doesn't belong to any array
           # If is NOT PRESENT too, it just means this is an empty port
           status = splitted[1]

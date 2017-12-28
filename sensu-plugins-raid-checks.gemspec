@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'date'
 require_relative 'lib/sensu-plugins-raid-checks'
 
-Gem::Specification.new do |s|
+Gem::Specification.new do |s| # rubocop:disable Metrics/BlockLength
   s.authors                = ['Sensu-Plugins and contributors']
 
   s.date                   = Date.today.to_s
@@ -13,7 +15,7 @@ Gem::Specification.new do |s|
                               controller/array health'
   s.email                  = '<sensu-users@googlegroups.com>'
   s.executables            = Dir.glob('bin/**/*.rb').map { |file| File.basename(file) }
-  s.files                  = Dir.glob('{bin,lib}/**/*') + %w(LICENSE README.md CHANGELOG.md)
+  s.files                  = Dir.glob('{bin,lib}/**/*') + %w[LICENSE README.md CHANGELOG.md]
   s.homepage               = 'https://github.com/sensu-plugins/sensu-plugins-raid-checks'
   s.license                = 'MIT'
   s.metadata               = { 'maintainer'         => 'sensu-plugin',
@@ -41,6 +43,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake',                      '~> 10.0'
   s.add_development_dependency 'redcarpet',                 '~> 3.2'
   s.add_development_dependency 'rspec',                     '~> 3.1'
-  s.add_development_dependency 'rubocop',                   '~> 0.40.0'
+  s.add_development_dependency 'rubocop',                   '~> 0.51.0'
   s.add_development_dependency 'yard',                      '~> 0.8'
 end
