@@ -44,7 +44,7 @@ class CheckRaid < Sensu::Plugin::Check::CLI
     return unless File.exist?('/proc/mdstat')
     contents = File.read('/proc/mdstat')
     mg = contents.lines.grep(/active|blocks/)
-    return unless mg.empty?
+    return if mg.empty?
     sg = mg.to_s.lines.grep(/\]\(F\)|[\[U]_/)
     if sg.empty?
       ok 'Software RAID OK'
