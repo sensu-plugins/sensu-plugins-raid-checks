@@ -58,7 +58,7 @@ class CheckMegaRAID < Sensu::Plugin::Check::CLI
     (0..$CHILD_STATUS.exitstatus - 1).each do |i|
       # and check them in turn
       stdout = `#{config[:megaraidcmd]} -LDInfo -L#{i} -a#{config[:controller]} `
-      unless Regexp.new('State\s*:\s*Optimal').match?(stdout)
+      unless Regexp.new('State\s*:\s*Optimal').match(stdout)
         error = sprintf '%svirtual drive %d: %s ', error, i, stdout[/State\s*:\s*.*/].split(':')[1] # rubocop:disable Style/FormatString
         have_error = true
       end
