@@ -53,12 +53,18 @@ class CheckMegaRAID < Sensu::Plugin::Check::CLI
   def run
     have_error = false
     error = ''
-    # get number of virtual drives
-    `#{config[:megaraidcmd]} -LDGetNum -a#{config[:controller]} `
-    (0..$CHILD_STATUS.exitstatus - 1).each do |i|
+    # get list of virtual drives
+    stdout = `#{config[:megaraidcmd]} -LDInfo -LALL -a#{config[:controller]} `.split("\n")
+    virtual_drives = []
+    stdout.each do |line|
+      if line =~ /^Virtual Drive:/
+        virtual_drives << line.gsub(/^Virtual Drive: (\d+) .*$/, '\1')
+      end
+    end
+    virtual_drives.each do |i|
       # and check them in turn
       stdout = `#{config[:megaraidcmd]} -LDInfo -L#{i} -a#{config[:controller]} `
-      unless Regexp.new('State\s*:\s*Optimal').match?(stdout)
+      unless Regexp.new(/State\s+:\s+Optimal/).match(stdout)
         error = sprintf '%svirtual drive %d: %s ', error, i, stdout[/State\s*:\s*.*/].split(':')[1] # rubocop:disable Style/FormatString
         have_error = true
       end
