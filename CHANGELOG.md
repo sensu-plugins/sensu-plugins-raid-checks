@@ -5,6 +5,8 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+### Fixed
+- `check-megaraid-sas-status.rb`: Fixed logic error in which it was assumed that all virtual drives were in sequential order. Also fixed pattern matching when parsing individual drive status.
 
 ## [2.0.2] - 2018-04-18
 ### Fixed
