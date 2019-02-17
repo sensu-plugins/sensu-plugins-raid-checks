@@ -64,6 +64,9 @@ class CheckMegaRAID < Sensu::Plugin::Check::CLI
     virtual_drives.each do |i|
       # and check them in turn
       stdout = `#{config[:megaraidcmd]} -LDInfo -L#{i} -a#{config[:controller]} `
+      # TODO: once we drop ruby 2.3 support change this to `.match?(stdout)`
+      # this reduces memory consumption as we don't care about the output in this conditional just whether or not it matches.
+      # The `.match?()` function was introduced in 2.4
       unless Regexp.new(/State\s+:\s+Optimal/).match(stdout)
         error = sprintf '%svirtual drive %d: %s ', error, i, stdout[/State\s*:\s*.*/].split(':')[1] # rubocop:disable Style/FormatString
         have_error = true

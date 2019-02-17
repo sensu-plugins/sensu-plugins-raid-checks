@@ -5,8 +5,10 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+
+## [2.0.3] - 2019-02-17
 ### Fixed
-- `check-megaraid-sas-status.rb`: Fixed logic error in which it was assumed that all virtual drives were in sequential order. Also fixed pattern matching when parsing individual drive status.
+- `check-megaraid-sas-status.rb`: Fixed logic error in which it was assumed that all virtual drives were in sequential order. Also fixed pattern matching when parsing individual drive status. (@SeanSith)
 
 ## [2.0.2] - 2018-04-18
 ### Fixed
@@ -68,7 +70,8 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/2.0.2...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/2.0.3...HEAD
+[2.0.3]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/2.0.2...2.0.3
 [2.0.2]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/2.0.1...2.0.2
 [2.0.1]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/1.0.0...2.0.0
