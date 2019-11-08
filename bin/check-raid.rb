@@ -18,6 +18,12 @@
 #   gem: sensu-plugin
 #
 # USAGE:
+#   Use `--sudo true` option if the binaries require root permissions.
+#
+#   Create a file named /etc/sudoers.d/sensu-check-raid
+#     and list all allowed commands with the correct path and options:
+#   Example:
+#     sensu ALL=(ALL) NOPASSWD: /usr/sbin/megacli -AdpAllInfo -aALL -NoLog
 #
 # NOTES:
 #
@@ -38,6 +44,14 @@ class CheckRaid < Sensu::Plugin::Check::CLI
          long: '--log VALUE',
          boolean: true,
          default: false
+
+  option :sudo,
+         description: 'Uses sudo to run commands',
+         short: '-s VALUE',
+         long: '--sudo VALUE',
+         boolean: true,
+         default: false
+
   # Check software raid
   #
   def check_software_raid
@@ -57,7 +71,7 @@ class CheckRaid < Sensu::Plugin::Check::CLI
   #
   def check_hp
     return unless File.exist?('/usr/bin/cciss_vol_status')
-    contents = `/usr/bin/cciss_vol_status /dev/sg0`
+    contents = `#{@cmd_prefix}/usr/bin/cciss_vol_status /dev/sg0`
     c = contents.lines.grep(/status\: OK\./)
     # #YELLOW
     if c.empty?
@@ -71,7 +85,7 @@ class CheckRaid < Sensu::Plugin::Check::CLI
   #
   def check_adaptec
     return unless File.exist?('/usr/StorMan/arcconf')
-    contents = `/usr/StorMan/arcconf GETCONFIG 1 AL`
+    contents = `#{@cmd_prefix}/usr/StorMan/arcconf GETCONFIG 1 AL`
 
     mg = contents.lines.grep(/Controller Status/)
     # #YELLOW
@@ -108,9 +122,9 @@ class CheckRaid < Sensu::Plugin::Check::CLI
   def check_mega_raid
     return unless File.exist?('/usr/sbin/megacli')
     contents = if config[:log]
-                 `/usr/sbin/megacli -AdpAllInfo -aALL`
+                 `#{@cmd_prefix}/usr/sbin/megacli -AdpAllInfo -aALL`
                else
-                 `/usr/sbin/megacli -AdpAllInfo -aALL -NoLog`
+                 `#{@cmd_prefix}/usr/sbin/megacli -AdpAllInfo -aALL -NoLog`
                end
     failed = contents.lines.grep(/(Critical|Failed) Disks\s+\: 0/)
     degraded = contents.lines.grep(/Degraded\s+\: 0/)
@@ -125,6 +139,7 @@ class CheckRaid < Sensu::Plugin::Check::CLI
   # Main function
   #
   def run
+    @cmd_prefix = config[:sudo] ? 'sudo ' : ''
     check_software_raid
     unless `lspci`.lines.grep(/RAID/).empty?
       check_hp
