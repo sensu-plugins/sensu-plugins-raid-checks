@@ -7,6 +7,7 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 ## [Unreleased]
 ### Added
 - add option to run binaries with `sudo`
+- add option to check-raid to specify the path to MegaCli binary
 
 ## [2.0.3] - 2019-02-17
 ### Fixed

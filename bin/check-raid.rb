@@ -52,6 +52,12 @@ class CheckRaid < Sensu::Plugin::Check::CLI
          boolean: true,
          default: false
 
+  option :megacli,
+         description: 'the MegaCli executable',
+         short: '-m CMD',
+         long: '--megacli CMD',
+         default: '/usr/sbin/megacli'
+
   # Check software raid
   #
   def check_software_raid
@@ -120,11 +126,11 @@ class CheckRaid < Sensu::Plugin::Check::CLI
   # Check Megaraid
   #
   def check_mega_raid
-    return unless File.exist?('/usr/sbin/megacli')
+    return unless File.exist?(config[:megacli])
     contents = if config[:log]
-                 `#{@cmd_prefix}/usr/sbin/megacli -AdpAllInfo -aALL`
+                 `#{@cmd_prefix}#{config[:megacli]} -AdpAllInfo -aALL`
                else
-                 `#{@cmd_prefix}/usr/sbin/megacli -AdpAllInfo -aALL -NoLog`
+                 `#{@cmd_prefix}#{config[:megacli]} -AdpAllInfo -aALL -NoLog`
                end
     failed = contents.lines.grep(/(Critical|Failed) Disks\s+\: 0/)
     degraded = contents.lines.grep(/Degraded\s+\: 0/)
