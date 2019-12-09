@@ -18,16 +18,28 @@ script:
 - bundle exec rake default
 - gem build sensu-plugins-raid-checks.gemspec
 - gem install sensu-plugins-raid-checks-*.gem
+before_deploy:
+  - bash -c "[ ! -d bonsai/ ] && git clone https://github.com/sensu/sensu-go-bonsai-asset.git bonsai || echo 'bonsai/ exists, skipping git clone'"
 deploy:
-  provider: rubygems
-  api_key:
-    secure: iGZDmc7nje9ynhvw4eTlyMgUzepqGvPbteehWgUMRJqXy22xHOiKlHb6wExtd5luvTUwpti4UOqeV1d9+23sgMUb+TwXDY5LiH+7sSy9FeptdOsEqggRPcRl9PsgnGQu3FJzun7v04UyNeJ0ng4NZtyAeq9ykNVyUauizY3nFAo=
-  gem: sensu-plugins-raid-checks
-  on:
-    tags: true
-    all_branches: true
-    rvm: 2.1
-    rvm: 2.2
-    rvm: 2.3.0
-    rvm: 2.4.1
-    repo: sensu-plugins/sensu-plugins-raid-checks
+  - provider: script
+    script: bonsai/ruby-runtime/travis-build-ruby-plugin-assets.sh sensu-plugins-raid-checks
+    skip_cleanup: true
+    on:
+      tags: true
+      all_branches: true
+      rvm: 2.1
+      rvm: 2.2
+      rvm: 2.3.0
+      rvm: 2.4.1
+  - provider: rubygems
+    api_key:
+      secure: iGZDmc7nje9ynhvw4eTlyMgUzepqGvPbteehWgUMRJqXy22xHOiKlHb6wExtd5luvTUwpti4UOqeV1d9+23sgMUb+TwXDY5LiH+7sSy9FeptdOsEqggRPcRl9PsgnGQu3FJzun7v04UyNeJ0ng4NZtyAeq9ykNVyUauizY3nFAo=
+    gem: sensu-plugins-raid-checks
+    on:
+      tags: true
+      all_branches: true
+      rvm: 2.1
+      rvm: 2.2
+      rvm: 2.3.0
+      rvm: 2.4.1
+      repo: sensu-plugins/sensu-plugins-raid-checks
