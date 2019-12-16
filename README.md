@@ -27,6 +27,11 @@
 
 ## Installation
 
+For sensu core:
+
 [Installation and Setup](http://sensu-plugins.io/docs/installation_instructions.html)
 
+For sensu go:
+
+[Sensu go assets](https://docs.sensu.io/sensu-go/latest/reference/assets/)
 ## Notes
