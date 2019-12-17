@@ -5,6 +5,8 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+- Add sensu bonsai asset build
+- Bump bundler version to 2.1
 
 ## [2.0.3] - 2019-02-17
 ### Fixed
