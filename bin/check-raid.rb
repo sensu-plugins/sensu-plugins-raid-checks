@@ -42,9 +42,11 @@ class CheckRaid < Sensu::Plugin::Check::CLI
   #
   def check_software_raid
     return unless File.exist?('/proc/mdstat')
+
     contents = File.read('/proc/mdstat')
     mg = contents.lines.grep(/active|blocks/)
     return if mg.empty?
+
     sg = mg.to_s.lines.grep(/\]\(F\)|[\[U]_/)
     if sg.empty?
       ok 'Software RAID OK'
@@ -57,6 +59,7 @@ class CheckRaid < Sensu::Plugin::Check::CLI
   #
   def check_hp
     return unless File.exist?('/usr/bin/cciss_vol_status')
+
     contents = `/usr/bin/cciss_vol_status /dev/sg0`
     c = contents.lines.grep(/status\: OK\./)
     # #YELLOW
@@ -71,6 +74,7 @@ class CheckRaid < Sensu::Plugin::Check::CLI
   #
   def check_adaptec
     return unless File.exist?('/usr/StorMan/arcconf')
+
     contents = `/usr/StorMan/arcconf GETCONFIG 1 AL`
 
     mg = contents.lines.grep(/Controller Status/)
@@ -107,6 +111,7 @@ class CheckRaid < Sensu::Plugin::Check::CLI
   #
   def check_mega_raid
     return unless File.exist?('/usr/sbin/megacli')
+
     contents = if config[:log]
                  `/usr/sbin/megacli -AdpAllInfo -aALL`
                else
