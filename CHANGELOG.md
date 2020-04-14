@@ -6,6 +6,16 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
 
+## [3.0.0] - 2020-04-14
+### Breaking Changes
+- `english` 0.6.3 has been yanked - https://rubygems.org/gems/english/versions/0.6.3.
+- Bump minimum required ruby to 2.3
+- Update bundler development dep to `2.1` to match travis environment
+- Update sensu-plugin dep to `~> 4.0`. you can read the changelog entries for [4.0](https://github.com/sensu-plugins/sensu-plugin/blob/master/CHANGELOG.md#400---2018-02-17)
+- Update rake dep
+- Update robocup dep
+- Update yard dep
+
 ## [2.0.3] - 2019-02-17
 ### Fixed
 - `check-megaraid-sas-status.rb`: Fixed logic error in which it was assumed that all virtual drives were in sequential order. Also fixed pattern matching when parsing individual drive status. (@SeanSith)
@@ -70,7 +80,8 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/2.0.3...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/3.0.0...HEAD
+[3.0.0]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/2.0.3...3.0.0
 [2.0.3]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/2.0.2...2.0.3
 [2.0.2]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/2.0.1...2.0.2
 [2.0.1]: https://github.com/sensu-plugins/sensu-plugins-raid-checks/compare/2.0.0...2.0.1

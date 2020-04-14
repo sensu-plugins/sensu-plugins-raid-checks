@@ -67,7 +67,7 @@ class CheckMPT2SAS < Sensu::Plugin::Check::CLI
       parts = line.match(volume_state)
       unless parts.nil?
         unless parts['VolState'] == 'Optimal'
-          error = format('%s%s ', error, parts['VolState'])
+          error = format('%s%s ', error, parts['VolState']) # rubocop:disable Style/FormatStringToken
           have_error = true
         end
       end
